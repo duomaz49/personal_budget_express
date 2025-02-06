@@ -74,6 +74,57 @@ export const updateEnvelope = async (req: Request, res: Response): Promise<void>
     }
 };
 
+export const transferMoneyFromEnvelope = async (req: Request, res: Response): Promise<void> => {
+    const { fromId, toId, amount } = req.body;
+
+    if(!fromId || !toId || amount === undefined || amount <= 0){
+        res.status(400).json({ message: "fromId, toId, and a positive amount are required" });
+        return
+    }
+
+    const parsedFromId = parseInt(fromId, 10);
+    const parsedToId = parseInt(toId, 10);
+    const parsedAmount = parseFloat(amount);
+
+    if (isNaN(parsedFromId) || isNaN(parsedToId) || isNaN(parsedAmount)) {
+        res.status(400).json({ message: "Invalid input parameters" });
+        return;
+    }
+
+    try {
+        const fromEnvelope = await envelopeRepository.findOneBy({ id: parsedFromId });
+        const toEnvelope = await envelopeRepository.findOneBy({ id: parsedToId });
+
+        if (!fromEnvelope) {
+            res.status(404).json({ message: "Source envelope not found" });
+            return;
+        }
+
+        if (!toEnvelope) {
+            res.status(404).json({ message: "Target envelope not found" });
+            return;
+        }
+
+        if(fromEnvelope.balance < parsedAmount){
+            res.status(400).json({ message: "Insufficient funds in the source envelope" });
+            return;
+        }
+
+        fromEnvelope.balance -= parsedAmount;
+        toEnvelope.balance += parsedAmount;
+
+        await envelopeRepository.save([fromEnvelope, toEnvelope]);
+
+        res.status(200).json({
+            message: "Transfer successful",
+            fromEnvelope: { id: fromEnvelope.id, balance: fromEnvelope.balance },
+            toEnvelope: { id: toEnvelope.id, balance: toEnvelope.balance },
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Failed to transfer money", error });
+    }
+};
+
 export const deleteEnvelope = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
 
