@@ -1,4 +1,13 @@
-node_modules/
+# Ignore the dist directory
+/dist/
+
+# Ignore node_modules directory
+/node_modules/
+
+# Ignore IDE-specific directories
+/.idea/
+/.vscode/
+
 .env
 .DS_Store
 npm-debug.log
