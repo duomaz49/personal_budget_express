@@ -5,7 +5,10 @@
       "outDir": "./dist",
       "rootDir": "./src",
       "esModuleInterop": true,
-      "strict": true
+      "strict": false,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "strictPropertyInitialization": false
     },
     "include": ["src/**/*"]
   }

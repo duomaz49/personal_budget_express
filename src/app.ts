@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import envelopeRoutes from './routes/envelopes'
 const bodyParser = require('body-parser')
 const cors = require('cors');
 
@@ -8,8 +9,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-    res.send('Welcome to the Personal Budget API');
-})
+app.use("/api/envelopes", envelopeRoutes);
+
 
 export default app; 
