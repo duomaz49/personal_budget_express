@@ -18,11 +18,11 @@
 
 1. Get All Envelopes
 
-GET /api/envelopes
+- GET /api/envelopes
 
-Description: Fetches all envelopes with their details.
+- Description: Fetches all envelopes with their details.
 
-Response:
+- Response:
 
 [
     {
@@ -37,11 +37,11 @@ Response:
 
 2. Get Single Envelope by ID
 
-GET /api/envelopes/:id
+- GET /api/envelopes/:id
 
-Description: Fetches details of a specific envelope.
+- Description: Fetches details of a specific envelope.
 
-Response:
+- Response:
 
 {
     "id": 1,
@@ -56,7 +56,7 @@ Response:
 
 ### POST /api/envelopes
 
-Request Body:
+- Request Body:
 
 {
     "name": "Rent",
@@ -64,7 +64,7 @@ Request Body:
     "limit": 2000
 }
 
-Response:
+- Response:
 
 {
     "message": "Envelope created successfully",
@@ -80,13 +80,13 @@ Response:
 
 ### PUT /api/envelopes/:id
 
-Request Body:
+- Request Body:
 
 {
     "balance": 1200
 }
 
-Response:
+- Response:
 
 {
     "message": "Envelope updated successfully",
@@ -100,7 +100,7 @@ Response:
 
 ### DELETE /api/envelopes/:id
 
-Response:
+- Response:
 
 {
     "message": "Envelope deleted successfully"
@@ -110,7 +110,7 @@ Response:
 
 ### POST /api/envelopes/transfer
 
-Request Body:
+- Request Body:
 
 {
     "fromId": 3,
@@ -118,7 +118,7 @@ Request Body:
     "amount": 200
 }
 
-Response:
+- Response:
 
 {
     "message": "Transfer successful",
@@ -134,33 +134,33 @@ Response:
 
 ### Error Handling
 
-400 Bad Request - Invalid input or missing parameters.
+- 400 Bad Request - Invalid input or missing parameters.
 
-404 Not Found - Envelope not found.
+- 404 Not Found - Envelope not found.
 
-500 Internal Server Error - Server or database issues.
+- 500 Internal Server Error - Server or database issues.
 
 ### Setup and Installation
 
 Clone the repository:
 
-git clone https://github.com/your-repo/envelope-api.git
+- git clone https://github.com/your-repo/envelope-api.git
 
 Install dependencies:
 
-npm install
+- npm install
 
 Configure the database in .env:
 
-DATABASE_URL=postgres://user:password@localhost:5432/envelopes_db
+- DATABASE_URL=postgres://user:password@localhost:5432/envelopes_db
 
 Run migrations:
 
-npm run migration:run
+- npm run migration:run
 
 Start the server:
 
-npm start
+- npm start
 
 ### Future Improvements
 
@@ -170,4 +170,4 @@ npm start
 
 ##### Author
 
-Developed by Tuomas Sirviö. Reach out for questions or contributions!
+- Developed by Tuomas Sirviö. Reach out for questions or contributions!
